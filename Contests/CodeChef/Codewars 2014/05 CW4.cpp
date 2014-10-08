@@ -1,6 +1,6 @@
 // Author : Bony Roopchandani
 // CW4
-// Rank if Lexicographic Permutation
+// Rank in Lexicographic Permutation
 
 // INCLUDES
 #include <algorithm>
