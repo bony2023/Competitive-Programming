@@ -71,7 +71,6 @@ typedef vector < ll > VLL;
 typedef vector < string > VS;
 
 int A[30+5], currNum;
-bool dp[30+5][1000+5][100];
 bool vis[30+5][1000+5][100];
 bool ans;
 
