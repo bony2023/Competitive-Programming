@@ -1,6 +1,5 @@
 // Author : Bony Roopchandani
-// PRLADDU
-// Greedy
+// 
 
 // INCLUDES
 #include <algorithm>
@@ -10,6 +9,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
+#include <limits>
 #include <list>
 #include <map>
 #include <queue>
@@ -70,73 +70,35 @@ typedef vector < int > VI;
 typedef vector < ll > VLL;
 typedef vector < string > VS;
 
-vector<PII> V, D;
-int N;
-
-bool cmp(PII a, PII b)
-{
-	return a.ss<b.ss;
+bool solve(int X, int R, int C) {
+	if(X==1)
+		return true;
+	if(X==2) {
+		return ((R*C)%X==0);
+	}
+	if((R*C)%X)
+		return false;
+	if(X%R==0 and X%C==0 and C != R)
+		return false;
+	return true;
 }
 
-ll solve()
-{
-	sort(all(V), cmp);
-	sort(all(D), cmp);
-	
-	int v=0, d=0;
-	int len=V.sz;
-	int num;
-	ll res=0;
-	
-	while(v<len)
-	{
-		num=V[v].ff;
-		
-		while(num)
-		{
-			if(num>=D[d].ff)
-			{
-				num-=D[d].ff;
-				res+=(D[d].ff*(abs(V[v].ss-D[d].ss)));
-				d++;
-			}
-			else
-			{
-				res+=(num*(abs(V[v].ss-D[d].ss)));
-				D[d].ff-=num;
-				num=0;
-			}
+int main(void) {
+	in("D-large.in");
+	out("D-large.out");
+	int T, cs=1; sfi(T);
+	while(T--) {
+		int X, R, C;
+		sfi(X), sfi(R), sfi(C);
+		if(R>C)
+			swap(R, C);
+		printf("Case #%d: ", cs++);
+		if(solve(X, R, C)) {
+			puts("GABRIEL");
 		}
-		
-		v++;
-	}
-	
-	return res;
-}
-
-int main(void)
-{
-	int T; sfi(T);
-	
-	while(T--)
-	{
-		sfi(N);
-		int x;
-		
-		rep(i, N)
-		{
-			sfi(x);
-			
-			if(x>=0)
-			V.pb(mp(x, i+1));
-			else
-			D.pb(mp(-x, i+1));
+		else {
+			puts("RICHARD");
 		}
-		
-		pfl(solve());
-		V.clear();
-		D.clear();
 	}
-	
 	return (0);
 }

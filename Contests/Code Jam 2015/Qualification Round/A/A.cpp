@@ -1,6 +1,5 @@
 // Author : Bony Roopchandani
-// CHEFSEG
-// Logarithmic Sequence
+// 
 
 // INCLUDES
 #include <algorithm>
@@ -71,34 +70,22 @@ typedef vector < int > VI;
 typedef vector < ll > VLL;
 typedef vector < string > VS;
 
-int main(void)
-{
-	int T; sfi(T);
-	
-	while(T--)
-	{
-		double N, K;
-		scanf("%lf %lf",&N, &K);
-		
-		int logK=floor(log10(K)/log10(2));
-		
-		if(((ll)1<<logK)>(ll)K)
-		logK--;
-		
-		double d=pow(2, logK);
-		double c=N/(2*d);
-
-		if(d==K)
-		{
-			printf("%.15lf\n", c);
-			continue;
+int main(void) {
+	in("A");
+	out("A.out");
+	int T, cs=1; sfi(T);
+	while(T--) {
+		int N; sfi(N);
+		int res=0, curr=0;
+		string S; cin>>S;
+		rep(i, S.sz) {
+			if(S[i] != '0' and curr<i) {
+				res+=(i-curr);
+				curr+=(i-curr);
+			}
+			curr+=(S[i]-'0');
 		}
-		else
-		{
-			d=2*(K-d)+1;
-			printf("%.15lf\n", d*c);
-		}
+		printf("Case #%d: %d\n", cs++, res);
 	}
-	
 	return (0);
 }

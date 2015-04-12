@@ -70,26 +70,30 @@ typedef vector < int > VI;
 typedef vector < ll > VLL;
 typedef vector < string > VS;
 
-int a[1000+5], k, n;
-int dp[1000+5][10000+5];
-
-int F(int id, int currxor)
-{
-	if(id==n) return currxor;
-	if(dp[id][currxor] != -1) return dp[id][currxor];
-	return dp[id][currxor]=max(F(id+1, currxor^a[id]), F(id+1, currxor));
+int getSpecial(int* a, int n, int f) {
+	int ret=0;
+	rep(i, n) {
+		ret+=(ceil((double)a[i]/f)-1);
+	}
+	return ret;
 }
 
-int main(void)
-{
-	int T; sfi(T);
-	
-	while(T--)
-	{
-		sfi(n), sfi(k);
-		rep(i, n) sfi(a[i]);
-		memset(dp, -1, sizeof dp);
-		pf(F(0, k));
+int main(void) {
+	in("B.in");
+	out("B.out");
+	int T, cs=1; sfi(T);
+	while(T--) {
+		int n, res=0; sfi(n);
+		int a[n+5];
+		rep(i, n) {
+			sfi(a[i]);
+			res=max(res, a[i]);
+		}
+		repd(i, res-1, 1) {
+			int x=getSpecial(a, n, i);
+			res=min(res, x+i);
+		}
+		printf("Case #%d: %d\n", cs++, res);
 	}
 	return (0);
 }
